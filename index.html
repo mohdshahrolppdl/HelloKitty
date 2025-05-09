@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello Kitty AR</title>
-
-    <!-- MindAR + A-Frame scripts -->
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image.prod.js"></script>
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image.aframe.js"></script>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web AR Example</title>
     <style>
-      body, html {
-        margin: 0;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-      }
-      .ar-container {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-      }
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #ar-container {
+            width: 100vw;
+            height: 100vh;
+        }
     </style>
-  </head>
-  <body>
-    <div class="ar-container">
-      <a-scene
-        mindar-image="imageTargetSrc: assets/marker.mind"
-        embedded
-        color-space="sRGB"
-        renderer="colorManagement: true, physicallyCorrectLights"
-        vr-mode-ui="enabled: false"
-        device-orientation-permission-ui="enabled: true"
-      >
-        <a-assets>
-          <a-asset-item id="kittyModel" src="assets/hello_kitty.glb"></a-asset-item>
-        </a-assets>
+</head>
+<body>
+    <div id="ar-container"></div>
 
-        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scene = document.createElement('a-scene');
+           js', 'sourceType: webcam;');
 
-        <a-entity mindar-image-target="targetIndex: 0">
-          <a-gltf-model src="#kittyModel" position="0 0 0" scale="0.1 0.1 0.1"></a-gltf-model>
-        </a-entity>
-      </a-scene>
-    </div>
-  </body>
+            const marker = document.createElement('a-marker');
+            marker.setAttribute('type', 'pattern');
+            marker.setAttribute('url', 'assets/pattern-marker-image.patt');
+
+            const model = document.createElement('a-entity');
+            model.setAttribute('gltf-model', '#my-model');
+            model.setAttribute('scale', '0.5 0.5 0.5');
+            model.setAttribute('position', '0 0 0');
+
+            marker.appendChild(model);
+            scene.appendChild(marker);
+            document.getElementById('ar-container').appendChild(scene);
+        });
+    </script>
+    <a-assets>
+        <a-asset-item id="my-model" src="assets/hello_kitty.glb"></a-asset-item>
+    </a-assets>
+</body>
 </html>
