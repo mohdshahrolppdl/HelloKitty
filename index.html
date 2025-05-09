@@ -24,7 +24,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const scene = document.createElement('a-scene');
-           js', 'sourceType: webcam;');
+            scene.setAttribute('embedded', '');
+           ', 'sourceType: webcam; facingMode: environment;');
 
             const marker = document.createElement('a-marker');
             marker.setAttribute('type', 'pattern');
@@ -41,7 +42,7 @@
         });
     </script>
     <a-assets>
-        <a-asset-item id="my-model" src="assets/hello_kitty.glb"></a-asset-item>
+        <a-asset-item id="my-model" src="assets/hello_kity.glb"></a-asset-item>
     </a-assets>
 </body>
 </html>
