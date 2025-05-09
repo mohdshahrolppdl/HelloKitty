@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello Kitty WebAR</title>
+
+    <!-- A-Frame and MindAR Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe@1.2.0/dist/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/aframe/mindar-image-aframe.prod.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="ar-container">
+      <a-scene
+        mindar-image="imageTargetSrc: ./assets/marker.mind;"
+        color-space="sRGB"
+        embedded
+        renderer="colorManagement: true, physicallyCorrectLights"
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: true"
+      >
+        <!-- Load 3D model -->
+        <a-assets>
+          <a-asset-item id="kittyModel" src="./assets/hello_kitty.glb"></a-asset-item>
+        </a-assets>
+
+        <!-- AR Camera -->
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+        <!-- Attach model to marker -->
+        <a-entity mindar-image-target="targetIndex: 0">
+          <a-gltf-model
+            src="#kittyModel"
+            position="0 0 0"
+            scale="0.1 0.1 0.1"
+            rotation="0 0 0"
+          ></a-gltf-model>
+        </a-entity>
+      </a-scene>
+    </div>
+  </body>
+</html>
